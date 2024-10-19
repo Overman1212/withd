@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha Verification</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #message {
+            margin-top: 20px;
+            display: none; /* Initially hidden */
+        }
+    </style>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdTO2YqAAAAACmPgH632QbX8UCyx5Yw-Dm36ppD"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Please Verify You Are Human</h1>
+        <button id="verify-btn">Verify</button>
+        <div id="message">
+            <p>Verification Passed!</p>
+            <button id="withdraw-btn">Withdraw</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('verify-btn').addEventListener('click', function () {
+            grecaptcha.execute('6LdTO2YqAAAAACmPgH632QbX8UCyx5Yw-Dm36ppD', {action: 'submit'}).then(function (token) {
+                // Here you should send the token to your server for verification
+                // For demonstration, we'll just show the message
+                document.getElementById('message').style.display = 'block';
+                document.getElementById('verify-btn').style.display = 'none';
+            });
+        });
+
+        document.getElementById('withdraw-btn').addEventListener('click', function () {
+            window.location.href = 'https://t.me/leap10';
+        });
+    </script>
+</body>
+</html>
